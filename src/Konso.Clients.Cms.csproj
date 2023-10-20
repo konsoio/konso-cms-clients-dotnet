@@ -4,6 +4,15 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Konso.Clients.Cms</PackageId>
+	  <Company>indevlabs.de</Company>
+	  <Copyright>Copyright © 2023</Copyright>
+	  <AssemblyVersion>1.0.1</AssemblyVersion>
+	  <FileVersion>1.0.1</FileVersion>
+	  <Version>1.0.1</Version>
+    <PackageTags>Konso, cms, api</PackageTags>
+    <RepositoryUrl>https://github.com/konsoio/konso-cms-clients-dotnet</RepositoryUrl> 
+    <RepositoryType>git</RepositoryType> 
   </PropertyGroup>
 
   <ItemGroup>
