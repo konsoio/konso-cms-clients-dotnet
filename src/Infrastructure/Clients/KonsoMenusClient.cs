@@ -31,7 +31,7 @@ namespace Yasmin.yaIdentity.Web.Services
             ValidateConfig(siteConfig, _endpoint);
             if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", siteConfig.ApiKey)) throw new Exception("Missing API key");
 
-            var builder = new UriBuilder($"{_endpoint}/api/menus/{siteConfig.BucketId}");
+            var builder = new UriBuilder($"{_endpoint}/menus/{siteConfig.BucketId}");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
 

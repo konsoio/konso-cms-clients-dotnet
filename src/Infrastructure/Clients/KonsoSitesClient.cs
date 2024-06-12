@@ -28,7 +28,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             ValidateConfig(siteConfig, _endpoint);
             if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", siteConfig.ApiKey)) throw new Exception("Missing API key");
 
-            var builder = new UriBuilder($"{_endpoint}/api/sites/{siteConfig.BucketId}");
+            var builder = new UriBuilder($"{_endpoint}/sites/{siteConfig.BucketId}");
 
             string url = builder.ToString();
 
