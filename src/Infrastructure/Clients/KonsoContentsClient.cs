@@ -48,7 +48,7 @@ namespace Yasmin.yaIdentity.Web.Services
                 query["categories"] = category.Value.ToString();
 
             if(id.HasValue)
-                query["id"] = id.Value.ToString();
+                query["contentId"] = id.Value.ToString();
 
 
             builder.Query = query.ToString();
