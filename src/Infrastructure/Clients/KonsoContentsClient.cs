@@ -6,6 +6,7 @@ using Konso.Clients.Cms.Domain.Contents;
 using Konso.Clients.Cms.Domain.Interfaces;
 using Konso.Clients.Cms.Domain.Sites;
 using Konso.Clients.Cms.Infrastructure.Clients;
+using Konso.Clients.Cms.Infrastructure.Extensions;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Text.Json;
@@ -23,6 +24,7 @@ namespace Yasmin.yaIdentity.Web.Services
 
             _clientFactory = clientFactory;
             _endpoint = configuration.GetValue<string>("Konso:Cms:Endpoint");
+            _endpoint = _endpoint.RemoveTailSlash();
 
         }
 

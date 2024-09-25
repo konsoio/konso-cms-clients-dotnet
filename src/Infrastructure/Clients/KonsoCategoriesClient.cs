@@ -5,6 +5,7 @@ using GetCms.Models.Categories.Dtos;
 using GetInfra.WebApi.Abstractions.Models.Responses;
 using Konso.Clients.Cms.Domain.Interfaces;
 using Konso.Clients.Cms.Domain.Sites;
+using Konso.Clients.Cms.Infrastructure.Extensions;
 
 namespace Konso.Clients.Cms.Infrastructure.Clients
 {
@@ -19,6 +20,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
         {
             _clientFactory = clientFactory;
             _endpoint = configuration.GetValue<string>("Konso:Cms:Endpoint");
+            _endpoint = _endpoint.RemoveTailSlash();
 
         }
         public async Task<PagedResponse<CategoryDto<int>>> GetByBucketIdAsync(KonsoCmsSite siteConfig, int section, int from, int to)

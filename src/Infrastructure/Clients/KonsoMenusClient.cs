@@ -3,6 +3,7 @@ using GetInfra.WebApi.Abstractions.Models.Responses;
 using Konso.Clients.Cms.Domain.Interfaces;
 using Konso.Clients.Cms.Domain.Sites;
 using Konso.Clients.Cms.Infrastructure.Clients;
+using Konso.Clients.Cms.Infrastructure.Extensions;
 using Microsoft.Extensions.Configuration;
 using System.Text.Json;
 using System.Web;
@@ -21,6 +22,7 @@ namespace Yasmin.yaIdentity.Web.Services
         {
             _clientFactory = clientFactory;
             _endpoint = configuration.GetValue<string>("Konso:Cms:Endpoint");
+            _endpoint = _endpoint.RemoveTailSlash();
 
         }
         public async Task<PagedResponse<MenuDto<int>>> GetByBucketIdAsync(KonsoCmsSite siteConfig, int from, int to)
