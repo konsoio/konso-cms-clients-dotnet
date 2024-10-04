@@ -8,7 +8,7 @@ namespace Konso.Clients.Cms.Domain.Interfaces
 {
     public interface IKonsoContentsClient
     {
-        Task<PagedResponse<KonsoContentDto>> GetByBucketIdAsync(KonsoCmsSite siteConfig, byte? type, int? category, int? id, int from, int to);
+        Task<PagedResponse<KonsoContentDto>> GetByBucketIdAsync(KonsoContentFilter filter);
 
         Task<GenericResultResponse<int>> CreateAsync(CreateContentRequest<int> request, KonsoCmsSite siteConfig);
         Task<KonsoContentDto> GetByIdAsync(KonsoCmsSite siteConfig, int contentId);

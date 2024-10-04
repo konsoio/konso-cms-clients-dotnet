@@ -28,30 +28,35 @@ namespace Yasmin.yaIdentity.Web.Services
 
         }
 
-        public async Task<PagedResponse<KonsoContentDto>> GetByBucketIdAsync(KonsoCmsSite siteConfig, byte? type, int? category, int? id, int from, int to)
+        public async Task<PagedResponse<KonsoContentDto>> GetByBucketIdAsync(KonsoContentFilter filter)
         {
             var client = _clientFactory.CreateClient();
 
 
-            ValidateConfig(siteConfig, _endpoint);
-            if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", siteConfig.ApiKey)) throw new Exception("Missing API key");
+            ValidateConfig(filter.SiteConfig, _endpoint);
+            if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", filter.SiteConfig.ApiKey)) throw new Exception("Missing API key");
 
-            var builder = new UriBuilder($"{_endpoint}/contents/{siteConfig.BucketId}");
+            var builder = new UriBuilder($"{_endpoint}/contents/{filter.SiteConfig.BucketId}");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
 
-            query["from"] = from.ToString();
-            query["to"] = to.ToString();
+            query["from"] = filter.From.ToString();
+            query["to"] = filter.To.ToString();
 
-            if (type.HasValue)
-                query["type"] = type.Value.ToString();
+            if (filter.Type.HasValue)
+                query["type"] = filter.Type.Value.ToString();
 
-            if (category.HasValue)
-                query["categories"] = category.Value.ToString();
+            if (filter.Category.HasValue)
+                query["categories"] = filter.Category.Value.ToString();
 
-            if(id.HasValue)
-                query["contentId"] = id.Value.ToString();
+            if(filter.Id.HasValue)
+                query["contentId"] = filter.Id.Value.ToString();
 
+            if (filter.Sort.HasValue)
+                query["sort"] = filter.Sort.Value.ToString();
+
+            if (filter.IsPublished.HasValue)
+                query["isPublished"] = filter.IsPublished.Value.ToString();
 
             builder.Query = query.ToString();
             string url = builder.ToString();
@@ -110,7 +115,10 @@ namespace Yasmin.yaIdentity.Web.Services
 
         public async Task<KonsoContentDto> GetByIdAsync(KonsoCmsSite siteConfig, int contentId)
         {
-            var paged = await GetByBucketIdAsync(siteConfig, null, null, contentId, 0, 1);
+            var paged = await GetByBucketIdAsync(new KonsoContentFilter() { 
+                SiteConfig = siteConfig, 
+                Id = contentId 
+            });
 
             if (paged.Total > 0)
             {
