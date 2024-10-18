@@ -12,5 +12,7 @@ namespace Konso.Clients.Cms.Domain.Interfaces
 
         Task<GenericResultResponse<int>> CreateAsync(CreateContentRequest<int> request, KonsoCmsSite siteConfig);
         Task<KonsoContentDto> GetByIdAsync(KonsoCmsSite siteConfig, int contentId);
+
+        Task<KonsoContentDto> GetBySlugAsync(KonsoCmsSite siteConfig, string slug);
     }
 }

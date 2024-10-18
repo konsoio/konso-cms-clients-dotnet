@@ -58,6 +58,9 @@ namespace Yasmin.yaIdentity.Web.Services
             if (filter.IsPublished.HasValue)
                 query["isPublished"] = filter.IsPublished.Value.ToString();
 
+            if (!string.IsNullOrEmpty(filter.Slug))
+                query["slug"] = filter.Slug;
+
             builder.Query = query.ToString();
             string url = builder.ToString();
 
@@ -118,6 +121,22 @@ namespace Yasmin.yaIdentity.Web.Services
             var paged = await GetByBucketIdAsync(new KonsoContentFilter() { 
                 SiteConfig = siteConfig, 
                 Id = contentId 
+            });
+
+            if (paged.Total > 0)
+            {
+                return paged.List.First();
+            }
+
+            return null;
+        }
+
+        public async Task<KonsoContentDto> GetBySlugAsync(KonsoCmsSite siteConfig, string slug)
+        {
+            var paged = await GetByBucketIdAsync(new KonsoContentFilter()
+            {
+                SiteConfig = siteConfig,
+                Slug = slug
             });
 
             if (paged.Total > 0)

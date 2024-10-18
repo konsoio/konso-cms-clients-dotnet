@@ -9,5 +9,7 @@ namespace Konso.Clients.Cms.Domain.Contents
         public int? Category { get; set; }
         public int? Id { get; set; }
         public bool? IsPublished { get; set; }
+
+        public string? Slug { get; set; }
     }
 }
