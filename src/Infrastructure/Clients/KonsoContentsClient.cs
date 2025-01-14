@@ -120,7 +120,9 @@ namespace Yasmin.yaIdentity.Web.Services
         {
             var paged = await GetByBucketIdAsync(new KonsoContentFilter() { 
                 SiteConfig = siteConfig, 
-                Id = contentId 
+                Id = contentId ,
+                From = 0,
+                To = 1,
             });
 
             if (paged.Total > 0)
@@ -136,7 +138,9 @@ namespace Yasmin.yaIdentity.Web.Services
             var paged = await GetByBucketIdAsync(new KonsoContentFilter()
             {
                 SiteConfig = siteConfig,
-                Slug = slug
+                Slug = slug,
+                From = 0,
+                To = 1,
             });
 
             if (paged.Total > 0)
