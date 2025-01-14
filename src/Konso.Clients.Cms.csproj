@@ -5,11 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Konso.Clients.Cms</PackageId>
-	  <Company>indevlabs.de</Company>
-	  <Copyright>Copyright © 2024</Copyright>
-	  <AssemblyVersion>1.0.6</AssemblyVersion>
-	  <FileVersion>1.0.6</FileVersion>
-	  <Version>1.0.6</Version>
+	  <Company>konso.io</Company>
+	  <Copyright>Copyright © 2025</Copyright>
+	  <AssemblyVersion>1.0.7</AssemblyVersion>
+	  <FileVersion>1.0.7</FileVersion>
+	  <Version>1.0.7</Version>
     <PackageTags>Konso, cms, api</PackageTags>
     <RepositoryUrl>https://github.com/konsoio/konso-cms-clients-dotnet</RepositoryUrl> 
     <RepositoryType>git</RepositoryType> 
