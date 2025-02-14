@@ -1,8 +1,7 @@
-﻿using GetCms.Models.Pages.Dtos;
-using GetCms.Models.Pages.Requests;
-using GetInfra.WebApi.Abstractions.Models.Responses;
+﻿using GetInfra.WebApi.Abstractions.Models.Responses;
 using GetInfra.WebApi.Abstractions.Models;
 using Konso.Clients.Cms.Domain.Sites;
+using Konso.Clients.Cms.Domain.Pages;
 
 namespace Konso.Clients.Cms.Domain.Interfaces
 {

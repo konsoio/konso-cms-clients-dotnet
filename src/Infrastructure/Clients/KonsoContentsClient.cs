@@ -1,5 +1,4 @@
-﻿using GetCms.Models.Contents.Requests;
-using GetInfra.WebApi.Abstractions.Extentions;
+﻿using GetInfra.WebApi.Abstractions.Extentions;
 using GetInfra.WebApi.Abstractions.Models;
 using GetInfra.WebApi.Abstractions.Models.Responses;
 using Konso.Clients.Cms.Domain.Contents;
@@ -12,7 +11,7 @@ using System.Text;
 using System.Text.Json;
 using System.Web;
 
-namespace Yasmin.yaIdentity.Web.Services
+namespace Konso.Clients.Cms.Infrastructure.Clients
 {
     public class KonsoContentsClient : BaseKonsoClient, IKonsoContentsClient
     {
@@ -90,7 +89,7 @@ namespace Yasmin.yaIdentity.Web.Services
             };
 
             // serialize request as json
-            var jsonStr = JsonSerializer.Serialize(request, options);
+            string jsonStr = JsonSerializer.Serialize(request, options);
 
             // string content 
             var httpItem = new StringContent(jsonStr, Encoding.UTF8, "application/json");
@@ -98,7 +97,7 @@ namespace Yasmin.yaIdentity.Web.Services
             // call api
             try
             {
-                var response = await client.PostAsync($"{_endpoint}/api/contents/{siteConfig.BucketId}", httpItem);
+                var response = await client.PostAsync($"{_endpoint}/contents/{siteConfig.BucketId}", httpItem);
                 var contents = await response.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrEmpty(contents)) throw new Exception("nothing is back");

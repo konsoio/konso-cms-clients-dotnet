@@ -1,5 +1,5 @@
-﻿using GetCms.Models.Categories.Dtos;
-using GetInfra.WebApi.Abstractions.Models.Responses;
+﻿using GetInfra.WebApi.Abstractions.Models.Responses;
+using Konso.Clients.Cms.Domain.Categories;
 using Konso.Clients.Cms.Domain.Sites;
 
 namespace Konso.Clients.Cms.Domain.Interfaces

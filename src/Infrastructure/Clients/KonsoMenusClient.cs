@@ -1,6 +1,6 @@
-﻿using GetCms.Models.Menus.Dtos;
-using GetInfra.WebApi.Abstractions.Models.Responses;
+﻿using GetInfra.WebApi.Abstractions.Models.Responses;
 using Konso.Clients.Cms.Domain.Interfaces;
+using Konso.Clients.Cms.Domain.Menus;
 using Konso.Clients.Cms.Domain.Sites;
 using Konso.Clients.Cms.Infrastructure.Clients;
 using Konso.Clients.Cms.Infrastructure.Extensions;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text.Json;
 using System.Web;
 
-namespace Yasmin.yaIdentity.Web.Services
+namespace Konso.Clients.Cms.Infrastructure.Clients
 {
     public class KonsoMenusClient : BaseKonsoClient, IKonsoMenusClient
     {

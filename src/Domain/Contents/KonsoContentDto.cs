@@ -1,6 +1,4 @@
-﻿using GetCms.Models.Contents.Dtos;
-
-namespace Konso.Clients.Cms.Domain.Contents
+﻿namespace Konso.Clients.Cms.Domain.Contents
 {
     public class KonsoContentDto : ContentDto<int>
     {

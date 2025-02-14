@@ -1,18 +1,17 @@
-﻿using GetCms.Models.Pages.Dtos;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System.Text.Json;
 using System.Web;
-using GetInfra.WebApi.Abstractions.Models;
 using System.Text;
-using GetCms.Models.Pages.Requests;
-using GetInfra.WebApi.Abstractions.Extentions;
-using GetInfra.WebApi.Abstractions.Models.Responses;
 using Konso.Clients.Cms.Infrastructure.Clients;
 using Konso.Clients.Cms.Domain.Interfaces;
 using Konso.Clients.Cms.Domain.Sites;
 using Konso.Clients.Cms.Infrastructure.Extensions;
+using GetInfra.WebApi.Abstractions.Models;
+using GetInfra.WebApi.Abstractions.Models.Responses;
+using Konso.Clients.Cms.Domain.Pages;
+using GetInfra.WebApi.Abstractions.Extentions;
 
-namespace Yasmin.yaIdentity.Web.Services
+namespace Konso.Clients.Cms.Infrastructure.Clients
 {
     public class KonsoPagesClient : BaseKonsoClient, IKonsoPagesClient
     {
@@ -94,7 +93,7 @@ namespace Yasmin.yaIdentity.Web.Services
             // call api
             try
             {
-                var response = await client.PostAsync($"{_endpoint}/api/pages/{siteConfig.BucketId}", httpItem);
+                var response = await client.PostAsync($"{_endpoint}/pages/{siteConfig.BucketId}", httpItem);
                 var contents = await response.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrEmpty(contents)) throw new Exception("nothing is back");
@@ -121,7 +120,7 @@ namespace Yasmin.yaIdentity.Web.Services
             if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", siteConfig.ApiKey)) throw new Exception("Missing API key");
 
             //int sortNum = (int)request.Sort;
-            var builder = new UriBuilder($"{_endpoint}/api/pages/{siteConfig.BucketId}");
+            var builder = new UriBuilder($"{_endpoint}/pages/{siteConfig.BucketId}");
             //{
             //    Port = -1
             //};
