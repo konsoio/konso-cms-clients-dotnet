@@ -7,9 +7,9 @@
     <PackageId>Konso.Clients.Cms</PackageId>
 	  <Company>konso.io</Company>
 	  <Copyright>Copyright © 2025</Copyright>
-	  <AssemblyVersion>1.1.0</AssemblyVersion>
-	  <FileVersion>1.1.0</FileVersion>
-	  <Version>1.1.0</Version>
+	  <AssemblyVersion>1.2.0</AssemblyVersion>
+	  <FileVersion>1.2.0</FileVersion>
+	  <Version>1.2.0</Version>
     <PackageTags>Konso, cms, api</PackageTags>
     <RepositoryUrl>https://github.com/konsoio/konso-cms-clients-dotnet</RepositoryUrl> 
     <RepositoryType>git</RepositoryType> 

@@ -129,7 +129,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             query["from"] = "0";
             query["to"] = "1";
             query["slug"] = slug;
-            query["isActive"] = "1";
+            //query["isActive"] = "1";
             builder.Query = query.ToString();
             string url = builder.ToString();
 

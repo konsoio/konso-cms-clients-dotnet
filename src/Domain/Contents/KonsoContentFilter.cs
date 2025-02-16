@@ -10,6 +10,10 @@ namespace Konso.Clients.Cms.Domain.Contents
         public int? Id { get; set; }
         public bool? IsPublished { get; set; }
 
+        public bool? IsLatest { get; set; }
+
         public string? Slug { get; set; }
+
+        public string? Term { get; set; }
     }
 }

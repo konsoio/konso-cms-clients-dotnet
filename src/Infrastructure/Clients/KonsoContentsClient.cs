@@ -4,7 +4,6 @@ using GetInfra.WebApi.Abstractions.Models.Responses;
 using Konso.Clients.Cms.Domain.Contents;
 using Konso.Clients.Cms.Domain.Interfaces;
 using Konso.Clients.Cms.Domain.Sites;
-using Konso.Clients.Cms.Infrastructure.Clients;
 using Konso.Clients.Cms.Infrastructure.Extensions;
 using Microsoft.Extensions.Configuration;
 using System.Text;
@@ -59,6 +58,12 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
 
             if (!string.IsNullOrEmpty(filter.Slug))
                 query["slug"] = filter.Slug;
+
+            if (!string.IsNullOrEmpty(filter.Term))
+                query["q"] = filter.Term;
+
+            if (filter.IsLatest.HasValue)
+                query["isLatest"] = filter.IsLatest.Value.ToString();
 
             builder.Query = query.ToString();
             string url = builder.ToString();
