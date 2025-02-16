@@ -45,7 +45,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
                 query["type"] = filter.Type.Value.ToString();
 
             if (filter.Category.HasValue)
-                query["categories"] = filter.Category.Value.ToString();
+                query["category"] = filter.Category.Value.ToString();
 
             if(filter.Id.HasValue)
                 query["contentId"] = filter.Id.Value.ToString();
