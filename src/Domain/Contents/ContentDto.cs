@@ -1,5 +1,6 @@
 ﻿using Konso.Clients.Cms.Domain.Categories;
 using Konso.Clients.Cms.Domain.Enums;
+using Konso.Clients.Cms.Domain.Meta;
 using Konso.Clients.Cms.Domain.Tags;
 
 namespace Konso.Clients.Cms.Domain.Contents
@@ -41,6 +42,8 @@ namespace Konso.Clients.Cms.Domain.Contents
         public string OriginMedia { get; set; }
 
         public string? Slug { get; set; }
+
+        public Dictionary<string, MetaDataDto<TKey>>? MetaData { get; set; }
     }
 
 }
