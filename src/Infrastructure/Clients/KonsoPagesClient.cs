@@ -30,7 +30,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
         public async Task<PagedResponse<KonsoPageDto>> GetByBucketIdAsync(KonsoCmsSite siteConfig, byte? pageType, string slug, int? id, int from, int to)
         {
             var client = _clientFactory.CreateClient();
-
+            var result = new PagedResponse<KonsoPageDto>();
 
             ValidateConfig(siteConfig, _endpoint);
             if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", siteConfig.ApiKey)) throw new Exception("Missing API key");
@@ -55,15 +55,24 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             builder.Query = query.ToString();
             string url = builder.ToString();
 
-            string responseBody = await client.GetStringAsync(url);
-
-            var options = new JsonSerializerOptions
+            try
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            };
 
-            var responseObj = JsonSerializer.Deserialize<PagedResponse<KonsoPageDto>>(responseBody, options);
-            return responseObj;
+                string responseBody = await client.GetStringAsync(url);
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                };
+
+                result = JsonSerializer.Deserialize<PagedResponse<KonsoPageDto>>(responseBody, options);
+
+            }
+            catch (HttpRequestException ex)
+            {
+                return result;
+            }
+            return result;
         }
 
 
