@@ -3,12 +3,12 @@ using Konso.Clients.Cms.Domain.Meta;
 
 namespace Konso.Clients.Cms.Domain.Pages
 {
-    public class CreatePageRequest<TKey> : IPublishable<TKey> where TKey : IEquatable<TKey>
+    public class CreatePageRequest : IPublishable
     {
         public CreatePageRequest() { }
-        public CreatePageRequest(PageDto<TKey> p)
+        public CreatePageRequest(KonsoPageDto p)
         {
-            Contents = new List<CreatePageComponentRequest<TKey>>();
+            Contents = new List<CreatePageComponentRequest>();
             Announce = p.Announce;
 
 
@@ -16,7 +16,6 @@ namespace Konso.Clients.Cms.Domain.Pages
 
             Name = p.Name;
             Slug = p.Slug;
-            SiteId = p.SiteId;
             Title = p.Title;
             PageType = p.PageType;
             ParentId = p.ParentId;
@@ -27,7 +26,7 @@ namespace Konso.Clients.Cms.Domain.Pages
             {
 
                 foreach (var c in p.Contents)
-                    Contents.Add(new CreatePageComponentRequest<TKey>()
+                    Contents.Add(new CreatePageComponentRequest()
                     {
                         Body = c.Body,
                         Name = c.Name,
@@ -37,20 +36,20 @@ namespace Konso.Clients.Cms.Domain.Pages
                     });
             }
 
-            CategoryIds = new List<TKey>();
-            MetaData = new List<CreateMetaDataRequest<TKey>>();
+            CategoryIds = new List<int>();
+            MetaData = new List<CreateMetaDataRequest>();
             if (p.MetaData != null && p.MetaData.Keys.Count > 0)
             {
                 foreach (var key in p.MetaData.Keys)
                 {
-                    MetaData.Add(new CreateMetaDataRequest<TKey> { Key = key, Type = MetaDataTypes.Page, Value = p.MetaData[key].Value, SiteId = p.SiteId });
+                    MetaData.Add(new CreateMetaDataRequest { Key = key, Type = MetaDataTypes.Page, Value = p.MetaData[key].Value });
                 }
             }
         }
-        public TKey? ParentId { get; set; }
+        public int? ParentId { get; set; }
         public PageTypes PageType { get; set; }
-        public TKey? MasterPageId { get; set; }
-        public List<CreateMetaDataRequest<TKey>> MetaData { get; set; }
+        public int? MasterPageId { get; set; }
+        public List<CreateMetaDataRequest> MetaData { get; set; }
         public string Css { get; set; }
         public bool IsActive { get; set; }
         public string Name { get; set; }
@@ -58,13 +57,11 @@ namespace Konso.Clients.Cms.Domain.Pages
 
         public string Announce { get; set; }
 
-        public TKey SiteId { get; set; }
-
         public string Title { get; set; }
 
-        public List<CreatePageComponentRequest<TKey>> Contents { get; set; }
-        public List<TKey> Menus { get; set; }
-        public List<TKey> CategoryIds { get; set; }
+        public List<CreatePageComponentRequest> Contents { get; set; }
+        public List<int> Menus { get; set; }
+        public List<int> CategoryIds { get; set; }
 
         public bool Publish { get; set; }
         public long? PublishedOn { get; set; }

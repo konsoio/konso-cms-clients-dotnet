@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Compile Remove="CacheLoadService.cs" />
+    <Compile Remove="Domain\Pages\PageDto.cs" />
     <Compile Remove="KonsoCategoriesClient.cs" />
     <Compile Remove="KonsoContentsClient.cs" />
     <Compile Remove="KonsoMenusClient.cs" />

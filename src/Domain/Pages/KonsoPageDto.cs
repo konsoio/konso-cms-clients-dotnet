@@ -1,19 +1,27 @@
 ﻿using Konso.Clients.Cms.Domain.Categories;
+using Konso.Clients.Cms.Domain.Contents;
 using Konso.Clients.Cms.Domain.Enums;
 using Konso.Clients.Cms.Domain.Menus;
 using Konso.Clients.Cms.Domain.Meta;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Konso.Clients.Cms.Domain.Pages
 {
-    public class PageDto<TKey> : Auditable<TKey>, IBelong<TKey> where TKey : IEquatable<TKey>
+    public class KonsoPageDto
     {
-        public PageDto() { }
-      
-        public TKey? ParentId { get; set; }
+        public int Id { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string? CreatedBy { get; set; }
+        public DateTime? PublishedOn { get; set; }
+        public string? PublishedBy { get; set; }
+        public DateTime? ModifiedOn { get; set; }
+        public string ModifiedBy { get; set; }
+
+
+        public int? ParentId { get; set; }
         public PageTypes PageType { get; set; }
-        public TKey? MasterPageId { get; set; }
-        public Dictionary<string, MetaDataDto<TKey>> MetaData { get; set; }
+        public int? MasterPageId { get; set; }
+        public Dictionary<string, MetaDataDto<int>> MetaData { get; set; }
         public string Css { get; set; }
         public bool IsActive { get; set; }
 
@@ -23,14 +31,11 @@ namespace Konso.Clients.Cms.Domain.Pages
 
         public string Announce { get; set; }
 
-        public TKey SiteId { get; set; }
-
         public string Title { get; set; }
 
 
         public List<KonsoCategoryDto> Categories { get; set; }
-        public List<KonsoCategoryDto> Contents { get; set; }
-        public List<MenuDto<TKey>> Menus { get; set; }
+        public List<KonsoContentDto> Contents { get; set; }
 
         [JsonIgnore]
         public DateTime ActualDate
@@ -45,7 +50,7 @@ namespace Konso.Clients.Cms.Domain.Pages
         }
 
         [JsonIgnore]
-        public PageDto<TKey> MasterPage { get; set; }
+        public KonsoPageDto MasterPage { get; set; }
 
         public bool IsSystem { get; set; }
 
@@ -54,6 +59,10 @@ namespace Konso.Clients.Cms.Domain.Pages
         public int Views { get; set; }
 
         public string Custom { get; set; }
-    }
 
+        public bool IsNew
+        {
+            get { return EqualityComparer<int>.Default.Equals(Id, default); }
+        }
+    }
 }

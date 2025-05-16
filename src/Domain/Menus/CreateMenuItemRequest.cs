@@ -1,11 +1,10 @@
 ﻿namespace Konso.Clients.Cms.Domain.Menus
 {
-    public class CreateMenuItemRequest<TKey> : IPublishable<TKey> where TKey : IEquatable<TKey>
+    public class CreateMenuItemRequest : IPublishable
     {
         public string Name { get; set; }
-        public TKey SiteId { get; set; }
 
-        public TKey MenuId { get; set; }
+        public int? MenuId { get; set; }
 
         public string Link { get; set; }
 
@@ -21,7 +20,7 @@
 
         public string ImagePathAlt { get; set; }
 
-        public TKey? PageId { get; set; }
+        public int? PageId { get; set; }
         public bool Publish { get; set; }
         public long? PublishedOn { get; set; }
 

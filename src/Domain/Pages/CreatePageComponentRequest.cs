@@ -2,9 +2,9 @@
 
 namespace Konso.Clients.Cms.Domain.Pages
 {
-    public class CreatePageComponentRequest<TKey>
+    public class CreatePageComponentRequest
     {
-        public TKey? Id { get; set; }
+        public int? Id { get; set; }
         public string? Name { get; set; }
         public string? Body { get; set; }
 
@@ -13,8 +13,6 @@ namespace Konso.Clients.Cms.Domain.Pages
         /// </summary>
         public ContentTypes Type { get; set; }
         public int? Order { get; set; }
-
-        public TKey SiteId { get; set; }
     }
 
 }

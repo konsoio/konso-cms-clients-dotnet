@@ -9,7 +9,7 @@ namespace Konso.Clients.Cms.Domain.Interfaces
     {
         Task<PagedResponse<KonsoContentDto>> GetByBucketIdAsync(KonsoContentFilter filter);
 
-        Task<GenericResultResponse<int>> CreateAsync(CreateContentRequest<int> request, KonsoCmsSite siteConfig);
+        Task<GenericResultResponse<int>> CreateAsync(CreateContentRequest request, KonsoCmsSite siteConfig);
         Task<KonsoContentDto> GetByIdAsync(KonsoCmsSite siteConfig, int contentId);
 
         Task<KonsoContentDto> GetBySlugAsync(KonsoCmsSite siteConfig, string slug);

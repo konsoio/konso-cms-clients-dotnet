@@ -23,33 +23,44 @@ public class KonsoCategoriesClient : BaseKonsoClient, IKonsoCategoriesClient
         _endpoint = _endpoint.RemoveTailSlash();
 
     }
-    public async Task<PagedResponse<CategoryDto<int>>> GetByBucketIdAsync(KonsoCmsSite siteConfig, int section, int from, int to)
+    public async Task<PagedResponse<KonsoCategoryDto>> GetByBucketIdAsync(KonsoCmsSite siteConfig, int? section, int from, int to)
     {
         var client = _clientFactory.CreateClient();
-
+        var result = new PagedResponse<KonsoCategoryDto>(); 
 
         ValidateConfig(siteConfig, _endpoint);
         if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", siteConfig.ApiKey)) throw new Exception("Missing API key");
 
-        var builder = new UriBuilder($"{_endpoint}/categories/{siteConfig.BucketId}");
+        var builder = new UriBuilder($"{_endpoint}/cms/categories/{siteConfig.BucketId}");
 
         var query = HttpUtility.ParseQueryString(builder.Query);
 
         query["from"] = from.ToString();
         query["to"] = to.ToString();
-        query["section"] = section.ToString();
-
+        if (section.HasValue)
+        {
+            query["section"] = section.ToString();
+        }
+       
         builder.Query = query.ToString();
         string url = builder.ToString();
 
-        string responseBody = await client.GetStringAsync(url);
-
-        var options = new JsonSerializerOptions
+        try
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        };
 
-        var responseObj = JsonSerializer.Deserialize<PagedResponse<CategoryDto<int>>>(responseBody, options);
-        return responseObj;
+            string responseBody = await client.GetStringAsync(url);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
+
+            result = JsonSerializer.Deserialize<PagedResponse<KonsoCategoryDto>>(responseBody, options);
+        }
+        catch (HttpRequestException ex)
+        {
+            return result;
+        }
+        return result;
     }
 }

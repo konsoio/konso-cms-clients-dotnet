@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Konso.Clients.Cms.Domain
+﻿namespace Konso.Clients.Cms.Domain
 {
-    public class BasicRequest<TKey> where TKey : IEquatable<TKey>
+    public class BasicRequest
     {
-        public TKey Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 

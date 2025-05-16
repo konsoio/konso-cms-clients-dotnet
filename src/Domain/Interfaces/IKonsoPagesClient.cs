@@ -7,8 +7,8 @@ namespace Konso.Clients.Cms.Domain.Interfaces
 {
     public interface IKonsoPagesClient
     {
-        Task<PagedResponse<PageDto<int>>> GetByBucketIdAsync(KonsoCmsSite siteConfig, byte? pageType, string slug, int? id, int from, int to);
-        Task<GenericResultResponse<int>> CreateAsync(CreatePageRequest<int> request, KonsoCmsSite siteConfig);
-        Task<PageDto<int>> GetBySlugAsync(KonsoCmsSite siteConfig, string slug);
+        Task<PagedResponse<KonsoPageDto>> GetByBucketIdAsync(KonsoCmsSite siteConfig, byte? pageType, string slug, int? id, int from, int to);
+        Task<GenericResultResponse<int>> CreateAsync(CreatePageRequest request, KonsoCmsSite siteConfig);
+        Task<KonsoPageDto> GetBySlugAsync(KonsoCmsSite siteConfig, string slug);
     }
 }

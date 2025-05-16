@@ -35,7 +35,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             ValidateConfig(siteConfig, _endpoint);
             if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", siteConfig.ApiKey)) throw new Exception("Missing API key");
 
-            var builder = new UriBuilder($"{_endpoint}/menus/{siteConfig.BucketId}");
+            var builder = new UriBuilder($"{_endpoint}/cms/menus/{siteConfig.BucketId}");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
 
@@ -58,7 +58,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
         }
 
 
-        public async Task<GenericResultResponse<int>> CreateAsync(CreateMenuRequest<int> request, KonsoCmsSite siteConfig)
+        public async Task<GenericResultResponse<int>> CreateAsync(CreateMenuRequest request, KonsoCmsSite siteConfig)
         {
             var result = new GenericResultResponse<int>();
             var client = _clientFactory.CreateClient();
@@ -82,7 +82,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             // call api
             try
             {
-                var response = await client.PostAsync($"{_endpoint}/menus/{siteConfig.BucketId}", httpItem);
+                var response = await client.PostAsync($"{_endpoint}/cms/menus/{siteConfig.BucketId}", httpItem);
                 var contents = await response.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrEmpty(contents)) throw new Exception("nothing is back");

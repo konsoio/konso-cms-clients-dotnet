@@ -3,20 +3,19 @@ using Konso.Clients.Cms.Domain.Pages;
 
 namespace Konso.Clients.Cms.Domain.Contents
 {
-    public class CreateContentRequest<TKey> : IPublishable<TKey> where TKey : IEquatable<TKey>
+    public class CreateContentRequest : IPublishable
     {
         public CreateContentRequest() { }
-        public CreateContentRequest(ContentDto<TKey> c)
+        public CreateContentRequest(KonsoContentDto c)
         {
             Announce = c.Announce;
             Body = c.Body;
             IsActive = c.IsActive;
             Name = c.Name;
             Order = c.Order;
-            SiteId = c.SiteId;
             Title = c.Title;
             Type = c.Type;
-            CategoriesIds = new List<TKey>();
+            CategoriesIds = new List<int>();
             PreviewImage = c.PreviewImage;
             OriginMedia = c.OriginMedia;
             AllowComments = c.AllowComments;
@@ -25,19 +24,19 @@ namespace Konso.Clients.Cms.Domain.Contents
             if (c.Categories != null)
                 foreach (var category in c.Categories)
                     CategoriesIds.Add(category.Id);
-            ParentId = c.ParentId;
+            ParentId = c.ParentId ?? 0;
             Slug = c.Slug;
         }
 
        
 
-        public CreateContentRequest(CreatePageComponentRequest<TKey> c)
+        public CreateContentRequest(CreatePageComponentRequest c)
         {
             Body = c.Body;
             Name = c.Name;
             Order = c.Order;
             Type = c.Type;
-            CategoriesIds = new List<TKey>();
+            CategoriesIds = new List<int>();
 
         }
 
@@ -50,16 +49,14 @@ namespace Konso.Clients.Cms.Domain.Contents
 
         public ContentTypes Type { get; set; }
 
-        public TKey SiteId { get; set; }
-
         public int? Order { get; set; }
-        public List<TKey>? CategoriesIds { get; set; }
+        public List<int>? CategoriesIds { get; set; }
 
         public string PreviewImage { get; set; }
 
-        public List<BasicRequest<TKey>> Tags { get; set; }
+        public List<BasicRequest> Tags { get; set; }
 
-        public TKey? ParentId { get; set; }
+        public int ParentId { get; set; }
 
         public bool AllowComments { get; set; }
 

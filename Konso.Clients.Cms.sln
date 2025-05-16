@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konso.Clients.Cms", "src\Konso.Clients.Cms.csproj", "{7569DBC8-9F44-4694-9D1B-BB9DDEB808A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konso.Clients.Cms.Tests", "tests\Konso.Clients.Cms.Tests\Konso.Clients.Cms.Tests.csproj", "{597B3EB1-36EB-4320-B57C-27A756B2572A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7569DBC8-9F44-4694-9D1B-BB9DDEB808A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7569DBC8-9F44-4694-9D1B-BB9DDEB808A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7569DBC8-9F44-4694-9D1B-BB9DDEB808A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{597B3EB1-36EB-4320-B57C-27A756B2572A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{597B3EB1-36EB-4320-B57C-27A756B2572A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{597B3EB1-36EB-4320-B57C-27A756B2572A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{597B3EB1-36EB-4320-B57C-27A756B2572A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -34,7 +34,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             ValidateConfig(filter.SiteConfig, _endpoint);
             if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", filter.SiteConfig.ApiKey)) throw new Exception("Missing API key");
 
-            var builder = new UriBuilder($"{_endpoint}/contents/{filter.SiteConfig.BucketId}");
+            var builder = new UriBuilder($"{_endpoint}/v2/cms/contents/{filter.SiteConfig.BucketId}");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
 
@@ -73,13 +73,14 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             var options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
             };
 
             var responseObj = JsonSerializer.Deserialize<PagedResponse<KonsoContentDto>>(responseBody, options);
             return responseObj;
         }
 
-        public async Task<GenericResultResponse<int>> CreateAsync(CreateContentRequest<int> request, KonsoCmsSite siteConfig)
+        public async Task<GenericResultResponse<int>> CreateAsync(CreateContentRequest request, KonsoCmsSite siteConfig)
         {
             var result = new GenericResultResponse<int>();
             var client = _clientFactory.CreateClient();
@@ -102,7 +103,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             // call api
             try
             {
-                var response = await client.PostAsync($"{_endpoint}/contents/{siteConfig.BucketId}", httpItem);
+                var response = await client.PostAsync($"{_endpoint}/cms/contents/{siteConfig.BucketId}", httpItem);
                 var contents = await response.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrEmpty(contents)) throw new Exception("nothing is back");

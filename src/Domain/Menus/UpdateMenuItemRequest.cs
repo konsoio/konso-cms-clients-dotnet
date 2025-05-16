@@ -1,8 +1,8 @@
 ﻿namespace Konso.Clients.Cms.Domain.Menus
 {
-    public class UpdateMenuItemRequest<TKey> : CreateMenuItemRequest<TKey> where TKey : IEquatable<TKey>
+    public class UpdateMenuItemRequest : CreateMenuItemRequest
     {
-        public TKey Id { get; set; }
+        public int Id { get; set; }
     }
 
 }

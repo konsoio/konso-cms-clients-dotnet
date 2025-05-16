@@ -2,7 +2,6 @@
 using System.Text.Json;
 using System.Web;
 using System.Text;
-using Konso.Clients.Cms.Infrastructure.Clients;
 using Konso.Clients.Cms.Domain.Interfaces;
 using Konso.Clients.Cms.Domain.Sites;
 using Konso.Clients.Cms.Infrastructure.Extensions;
@@ -28,7 +27,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
 
         }
 
-        public async Task<PagedResponse<PageDto<int>>> GetByBucketIdAsync(KonsoCmsSite siteConfig, byte? pageType, string slug, int? id, int from, int to)
+        public async Task<PagedResponse<KonsoPageDto>> GetByBucketIdAsync(KonsoCmsSite siteConfig, byte? pageType, string slug, int? id, int from, int to)
         {
             var client = _clientFactory.CreateClient();
 
@@ -36,7 +35,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             ValidateConfig(siteConfig, _endpoint);
             if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", siteConfig.ApiKey)) throw new Exception("Missing API key");
 
-            var builder = new UriBuilder($"{_endpoint}/pages/{siteConfig.BucketId}");
+            var builder = new UriBuilder($"{_endpoint}/cms/pages/{siteConfig.BucketId}");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
 
@@ -63,13 +62,13 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
-            var responseObj = JsonSerializer.Deserialize<PagedResponse<PageDto<int>>>(responseBody, options);
+            var responseObj = JsonSerializer.Deserialize<PagedResponse<KonsoPageDto>>(responseBody, options);
             return responseObj;
         }
 
 
 
-        public async Task<GenericResultResponse<int>> CreateAsync(CreatePageRequest<int> request, KonsoCmsSite siteConfig)
+        public async Task<GenericResultResponse<int>> CreateAsync(CreatePageRequest request, KonsoCmsSite siteConfig)
         {
             var result = new GenericResultResponse<int>();
             var client = _clientFactory.CreateClient();
@@ -93,7 +92,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             // call api
             try
             {
-                var response = await client.PostAsync($"{_endpoint}/pages/{siteConfig.BucketId}", httpItem);
+                var response = await client.PostAsync($"{_endpoint}/cms/pages/{siteConfig.BucketId}", httpItem);
                 var contents = await response.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrEmpty(contents)) throw new Exception("nothing is back");
@@ -111,7 +110,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             }
         }
 
-        public async Task<PageDto<int>> GetBySlugAsync(KonsoCmsSite siteConfig, string slug)
+        public async Task<KonsoPageDto> GetBySlugAsync(KonsoCmsSite siteConfig, string slug)
         {
             var client = _clientFactory.CreateClient();
 
@@ -120,7 +119,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
             if (!client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", siteConfig.ApiKey)) throw new Exception("Missing API key");
 
             //int sortNum = (int)request.Sort;
-            var builder = new UriBuilder($"{_endpoint}/pages/{siteConfig.BucketId}");
+            var builder = new UriBuilder($"{_endpoint}/cms/pages/{siteConfig.BucketId}");
             //{
             //    Port = -1
             //};
@@ -140,7 +139,7 @@ namespace Konso.Clients.Cms.Infrastructure.Clients
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
-            var responseObj = JsonSerializer.Deserialize<PagedResponse<PageDto<int>>>(responseBody, options);
+            var responseObj = JsonSerializer.Deserialize<PagedResponse<KonsoPageDto>>(responseBody, options);
 
             if (responseObj.Total == 1)
                 return responseObj.List.First();

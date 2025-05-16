@@ -1,6 +1,6 @@
 ﻿namespace Konso.Clients.Cms.Domain
 {
-    public interface IPublishable<TKey> where TKey : IEquatable<TKey>
+    public interface IPublishable
     {
         bool Publish { get; set; }
 

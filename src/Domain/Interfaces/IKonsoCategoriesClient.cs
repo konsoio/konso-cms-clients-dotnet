@@ -6,6 +6,6 @@ namespace Konso.Clients.Cms.Domain.Interfaces
 {
     public interface IKonsoCategoriesClient
     {
-        Task<PagedResponse<CategoryDto<int>>> GetByBucketIdAsync(KonsoCmsSite siteConfig, int section, int from, int to);
+        Task<PagedResponse<KonsoCategoryDto>> GetByBucketIdAsync(KonsoCmsSite siteConfig, int? section, int from, int to);
     }
 }
